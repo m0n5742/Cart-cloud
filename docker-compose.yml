@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+    ide:
+      build: ./theia
+      container_name: ide
+      volumes:
+        - ./:/home/project
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /usr/bin/docker:/usr/bin/docker
+      ports:
+        - "127.0.0.1:3000:3000" 
+  
+    frontend:
+      build: ./frontend
+      container_name: frontend
+      ports:
+        - "127.0.0.1:81:80"
+
+    shop:
+      build: ./shop
+      container_name: shop
+      ports:
+        - "127.0.0.1:82:80"
+
+
+    mongodb:
+      container_name: mongodb
+      image: mongo
+      ports:
+        - "127.0.0.1:27017:27017"      
